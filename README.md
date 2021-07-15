@@ -1,2 +1,2 @@
 # My-Weather
-testing app
+testing app with openweathermap api.
