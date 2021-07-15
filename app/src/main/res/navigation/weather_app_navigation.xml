@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/weather_app_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="ruslan.galiev.myweather.home.HomeFragment"
+        android:label="Главная"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_findLocationFragment"
+            app:destination="@id/findLocationFragment"
+            app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/findLocationFragment"
+        android:name="ruslan.galiev.myweather.findlocation.FindLocationFragment"
+        android:label="Найти город"
+        tools:layout="@layout/fragment_find_location">
+        <action
+            android:id="@+id/action_findLocationFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:popUpTo="@id/findLocationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="ruslan.galiev.myweather.detail.DetailFragment"
+        android:label="Подробности"
+        tools:layout="@layout/fragment_detail">
+        <action
+            android:id="@+id/action_detailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="latitude"
+            app:argType="float" />
+        <argument
+            android:name="longitude"
+            app:argType="float" />
+        <argument
+            android:name="locationName"
+            app:argType="string" />
+        <argument
+            android:name="countryName"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/disconnectedFragment"
+        android:name="ruslan.galiev.myweather.disconnected.DisconnectedFragment"
+        tools:layout="@layout/fragment_disconnected" />
+</navigation>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    tool:context="ruslan.galiev.myweather.detail.DetailFragment">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="ruslan.galiev.myweather.detail.DetailViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/detail_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f2fcfe"
+        android:orientation="vertical"
+        android:visibility="@{viewModel.currentWeatherInformation != null ? View.VISIBLE : View.GONE}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+            <TextView
+                android:id="@+id/detail_location_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="@{viewModel.locationName}"
+                android:textAlignment="textStart"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.407"
+                tool:text="Челны" />
+
+            <TextView
+                android:id="@+id/detail_temperature"
+                temperature="@{viewModel.currentWeatherInformation.temperature}"
+                temperatureUnit="@{viewModel.settings.temperatureUnit}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="4dp"
+                android:textSize="34sp"
+                app:layout_constraintBottom_toBottomOf="@+id/detail_location_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                tool:text="36℃" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_of_hourly_weather_information"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#f2fcfe"
+                    android:orientation="horizontal"
+                    android:padding="2dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:reverseLayout="false"
+                    tool:listitem="@layout/hourly_weather_information" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_of_daily_weather_information"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#f2fcfe"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tool:listitem="@layout/daily_weather_information" />
+
+                <include
+                    layout="@layout/detail_information"
+                    bind:information="@{viewModel.currentWeatherInformation}"
+                    bind:settings="@{viewModel.settings}" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_of_location_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#f2fcfe"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

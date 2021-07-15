@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="relatedNameLocation"
+            type="ruslan.galiev.myweather.responses.RelatedNameLocation" />
+
+        <variable
+            name="clickListener"
+            type="ruslan.galiev.myweather.findlocation.RelatedNameLocationListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:onClick="@{() -> clickListener.onClick(relatedNameLocation)}">
+
+        <TextView
+            android:id="@+id/related_location_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{relatedNameLocation.name}"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/related_stateName_countryName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tool:text="London" />
+
+        <TextView
+            android:id="@+id/related_stateName_countryName"
+            relatedNameLocation="@{relatedNameLocation}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/related_location_name"
+            app:layout_constraintStart_toStartOf="@+id/related_location_name"
+            app:layout_constraintTop_toBottomOf="@+id/related_location_name"
+            tool:text="OH, US" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
